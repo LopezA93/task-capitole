@@ -62,7 +62,6 @@ const Navbar = () => {
           sx={{ height: { xs: 20, sm: 24 } }}
         />
 
-        {/* Nav inline (desktop) */}
         {user?.role === "admin" && (
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, ml: 1 }}>
             {adminLinks.map((l) => (
@@ -82,7 +81,6 @@ const Navbar = () => {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        {/* Acciones inline (desktop) */}
         <Typography
           variant="body2"
           color="text.secondary"
@@ -103,7 +101,6 @@ const Navbar = () => {
           Cerrar sesión
         </Button>
 
-        {/* Hamburguesa (mobile) */}
         <IconButton
           edge="end"
           aria-label="menú"
@@ -124,7 +121,6 @@ const Navbar = () => {
           }}
           role="presentation"
         >
-          {/* Cabecera: usuario */}
           <Box
             sx={{
               p: 2.5,
@@ -135,7 +131,9 @@ const Navbar = () => {
               color: "#fff",
             }}
           >
-            <Avatar sx={{ bgcolor: "#fff", color: "primary.main", fontWeight: 700 }}>
+            <Avatar
+              sx={{ bgcolor: "#fff", color: "primary.main", fontWeight: 700 }}
+            >
               {user?.name?.charAt(0).toUpperCase()}
             </Avatar>
             <Box sx={{ minWidth: 0 }}>
@@ -156,7 +154,6 @@ const Navbar = () => {
             </Box>
           </Box>
 
-          {/* Navegación */}
           {user?.role === "admin" && (
             <>
               <Typography
@@ -183,7 +180,9 @@ const Navbar = () => {
                         },
                       }}
                     >
-                      <ListItemIcon sx={{ minWidth: 40 }}>{l.icon}</ListItemIcon>
+                      <ListItemIcon sx={{ minWidth: 40 }}>
+                        {l.icon}
+                      </ListItemIcon>
                       <ListItemText primary={l.label} />
                     </ListItemButton>
                   </ListItem>
@@ -194,7 +193,6 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Cerrar sesión */}
           <Divider />
           <Box sx={{ p: 2 }}>
             <Button

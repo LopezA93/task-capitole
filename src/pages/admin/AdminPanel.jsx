@@ -26,7 +26,7 @@ const AdminPanel = () => {
   const handleComplete = async (id, completed) => {
     try {
       const upd = await completeTask(id, completed);
-      setTasks((prev) => prev.map((t) => (t._id === id ? upd : t)));
+      setTasks((prev) => prev.map((t) => (t.id === id ? upd : t)));
       toast.success(completed ? "Tarea completada" : "Tarea marcada pendiente");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error al cambiar estado");
@@ -37,7 +37,7 @@ const AdminPanel = () => {
     if (!responsable) return;
     try {
       const upd = await assignTask(id, responsable);
-      setTasks((prev) => prev.map((t) => (t._id === id ? upd : t)));
+      setTasks((prev) => prev.map((t) => (t.id === id ? upd : t)));
       toast.success("Responsable asignado");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error al asignar");
@@ -47,7 +47,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     try {
       await deleteTask(id);
-      setTasks((prev) => prev.filter((t) => t._id !== id));
+      setTasks((prev) => prev.filter((t) => t.id !== id));
       toast.success("Tarea eliminada");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error al eliminar");

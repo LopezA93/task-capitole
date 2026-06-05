@@ -3,9 +3,8 @@ import { Box, Paper, Typography, Chip, Button } from "@mui/material";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog.jsx";
 import AssignDialog from "../AssignDialog/AssignDialog.jsx";
 
-const idOf = (u) => u.id || u._id;
 const nameOf = (users, id) =>
-  users.find((u) => idOf(u) === id)?.name || "Sin asignar";
+  users.find((u) => u.id === id)?.name || "Sin asignar";
 
 const TaskList = ({
   tasks,
@@ -19,19 +18,16 @@ const TaskList = ({
   const [toAssign, setToAssign] = useState(null);
 
   const confirmDelete = () => {
-    if (toDelete) onDelete(toDelete._id);
+    if (toDelete) onDelete(toDelete.id);
     setToDelete(null);
   };
 
   const assignCurrentId = toAssign
-    ? toAssign.responsable?._id ||
-      toAssign.responsable?.id ||
-      toAssign.responsable ||
-      ""
+    ? toAssign.responsable?.id || toAssign.responsable || ""
     : "";
 
   const confirmAssign = (userId) => {
-    if (toAssign) onAssign(toAssign._id, userId);
+    if (toAssign) onAssign(toAssign.id, userId);
     setToAssign(null);
   };
 
@@ -42,12 +38,12 @@ const TaskList = ({
     <Box>
       {tasks.map((t) => {
         const responsableId =
-          t.responsable?._id || t.responsable?.id || t.responsable || "";
+          t.responsable?.id || t.responsable || "";
         const responsableName =
           t.responsable?.name || nameOf(users, responsableId);
         return (
           <Paper
-            key={t._id}
+            key={t.id}
             elevation={1}
             sx={{
               p: 2,
@@ -103,7 +99,7 @@ const TaskList = ({
                   size="small"
                   variant="contained"
                   color="success"
-                  onClick={() => onComplete(t._id, true)}
+                  onClick={() => onComplete(t.id, true)}
                 >
                   Completar
                 </Button>
@@ -113,7 +109,7 @@ const TaskList = ({
                   size="small"
                   variant="outlined"
                   color="inherit"
-                  onClick={() => onComplete(t._id, false)}
+                  onClick={() => onComplete(t.id, false)}
                 >
                   Marcar pendiente
                 </Button>

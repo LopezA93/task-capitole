@@ -10,8 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 
-const idOf = (u) => u.id || u._id;
-
 const UserList = ({ users, currentUserId, onEdit, onDelete }) => {
   if (!users.length)
     return <Typography color="text.secondary">No hay usuarios.</Typography>;
@@ -20,7 +18,7 @@ const UserList = ({ users, currentUserId, onEdit, onDelete }) => {
     <Paper elevation={1}>
       <List disablePadding>
         {users.map((u, i) => (
-          <div key={idOf(u)}>
+          <div key={u.id}>
             {i > 0 && <Divider component="li" />}
             <ListItem
               sx={{ flexWrap: "wrap", gap: 1 }}
@@ -36,7 +34,7 @@ const UserList = ({ users, currentUserId, onEdit, onDelete }) => {
                   <Button size="small" onClick={() => onEdit(u)}>
                     Editar
                   </Button>
-                  {idOf(u) !== currentUserId && (
+                  {u.id !== currentUserId && (
                     <Button size="small" color="error" onClick={() => onDelete(u)}>
                       Eliminar
                     </Button>

@@ -10,8 +10,6 @@ import {
   Button,
 } from "@mui/material";
 
-const idOf = (u) => u.id || u._id;
-
 const TaskForm = ({ users, onCreate }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -76,7 +74,7 @@ const TaskForm = ({ users, onCreate }) => {
           onChange={(e) => setResponsable(e.target.value)}
         >
           {users.map((u) => (
-            <MenuItem key={idOf(u)} value={idOf(u)}>
+            <MenuItem key={u.id} value={u.id}>
               {u.name}
             </MenuItem>
           ))}

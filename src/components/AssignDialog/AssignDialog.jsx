@@ -11,8 +11,6 @@ import {
   Button,
 } from "@mui/material";
 
-const idOf = (u) => u.id || u._id;
-
 const AssignDialog = ({ open, users = [], currentId = "", onConfirm, onCancel }) => {
   const [selected, setSelected] = useState(currentId);
 
@@ -33,7 +31,7 @@ const AssignDialog = ({ open, users = [], currentId = "", onConfirm, onCancel })
           >
             <MenuItem value="">Sin asignar</MenuItem>
             {users.map((u) => (
-              <MenuItem key={idOf(u)} value={idOf(u)}>
+              <MenuItem key={u.id} value={u.id}>
                 {u.name}
               </MenuItem>
             ))}

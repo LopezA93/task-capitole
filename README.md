@@ -1,16 +1,64 @@
-# React + Vite
+# Front — Tareas Manager Capitole & Synectic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web (SPA) desarrollada con React + Vite que consume la [Task API](https://api-task-capitole.vercel.app/). Permite login/registro, gestión de tareas y de usuarios, con vistas y permisos según el rol: **admin** (administra tareas y usuarios) y **user** (ve y completa sus tareas asignadas).
 
-Currently, two official plugins are available:
+🔗 **Demo:** [task-capitole.vercel.app](https://task-capitole.vercel.app/) (Deploy Vercel)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React 19 · Vite · React Router · Material UI · Axios · react-hot-toast · Context API
 
-## Expanding the ESLint configuration
+## Requisitos
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js 18+
+- pnpm
+- La [Tareas Manager Capitole & Synectic API](https://api-task-capitole.vercel.app/) corriendo (local o en producción)
+
+## Instalación
+
+```bash
+pnpm install
+cp .env.example .env   # completar VITE_API_URL
+pnpm dev
+```
+
+## Variables de entorno (.env.example)
+
+| Variable       | Descripción                                           |
+| -------------- | ----------------------------------------------------- |
+| `VITE_API_URL` | URL base de la Task API (ej. `http://localhost:8087`) |
+
+> La variable se hornea en el build de Vite, así que tiene que estar definida al momento de buildear.
+
+## Scripts
+
+| Comando        | Acción                           |
+| -------------- | -------------------------------- |
+| `pnpm dev`     | Inicia el proyecto en desarrollo |
+| `pnpm build`   | Genera el build de producción    |
+| `pnpm preview` | Sirve el build localmente        |
+| `pnpm lint`    | Corre ESLint                     |
+
+## Estructura
+
+```
+src/
+├── main.jsx            # entry (Theme, Router, Providers)
+├── App.jsx             # rutas + lazy loading
+├── pages/              # Login, Register, UserPanel, admin/*
+├── components/         # Navbar, Layout, TaskList, TaskForm, UserList, dialogs...
+├── context/            # AuthContext, AdminDataContext
+├── services/           # api (axios), authService, taskService
+├── styles/theme.js     # tema de Material UI
+└── utils/logos.js      # logos
+```
+
+## Funcionalidades
+
+- **Login y registro** de usuarios.
+- **Panel user:** ve sus tareas asignadas y las marca como completadas.
+- **Panel admin:** CRUD de tareas, asignar responsable, y gestión de usuarios (crear, editar, eliminar).
+- **Rutas protegidas** por autenticación y por rol.
+- **Responsive** (menú hamburguesa en mobile) y notificaciones con toasts.

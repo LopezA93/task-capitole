@@ -25,7 +25,7 @@ const UserPanel = () => {
   const handleComplete = async (id, completed) => {
     try {
       const upd = await completeTask(id, completed);
-      setTasks((prev) => prev.map((t) => (t._id === id ? upd : t)));
+      setTasks((prev) => prev.map((t) => (t.id === id ? upd : t)));
       toast.success(completed ? "Tarea completada" : "Tarea marcada pendiente");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error al cambiar estado");

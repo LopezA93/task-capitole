@@ -9,8 +9,6 @@ import { createUser, updateUser, deleteUser } from "../../services/taskService.j
 import { useAdminData } from "../../context/AdminDataContext.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const idOf = (u) => u.id || u._id;
-
 const UsersPanel = () => {
   const { users, loading, error, setUsers, setTasks } = useAdminData();
   const { user: currentUser } = useAuth();
@@ -30,8 +28,8 @@ const UsersPanel = () => {
 
   const handleUpdateUser = async (payload) => {
     try {
-      const upd = await updateUser(idOf(toEdit), payload);
-      setUsers((prev) => prev.map((u) => (idOf(u) === idOf(upd) ? upd : u)));
+      const upd = await updateUser(toEdit.id, payload);
+      setUsers((prev) => prev.map((u) => (u.id === upd.id ? upd : u)));
       toast.success("Usuario actualizado");
       setToEdit(null);
     } catch (err) {
@@ -44,12 +42,12 @@ const UsersPanel = () => {
     const target = toDelete;
     setToDelete(null);
     try {
-      await deleteUser(idOf(target));
-      setUsers((prev) => prev.filter((u) => idOf(u) !== idOf(target)));
+      await deleteUser(target.id);
+      setUsers((prev) => prev.filter((u) => u.id !== target.id));
       setTasks((prev) =>
         prev.map((t) => {
-          const respId = t.responsable?._id || t.responsable?.id || t.responsable;
-          return respId === idOf(target) ? { ...t, responsable: null } : t;
+          const respId = t.responsable?.id || t.responsable;
+          return respId === target.id ? { ...t, responsable: null } : t;
         }),
       );
       toast.success("Usuario eliminado");
